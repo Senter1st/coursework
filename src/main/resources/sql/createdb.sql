@@ -1,6 +1,6 @@
-create table Specialty
+create table Speciality
 (
-    idSpecialty integer,
+    idSpeciality integer,
     name        varchar,
     description text
 );
@@ -11,5 +11,5 @@ create table Student
     name        varchar,
     score       float,
     idSpecialty integer,
-    foreign key (idSpecialty) references Specialty (idSpecialty)
+    foreign key (idSpeciality) references Speciality (idSpeciality)
 );
