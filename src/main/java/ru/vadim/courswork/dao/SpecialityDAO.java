@@ -1,5 +1,6 @@
 package ru.vadim.courswork.dao;
 
+import ru.vadim.courswork.connection.ConnectionPool;
 import ru.vadim.courswork.entities.Speciality;
 
 import java.sql.PreparedStatement;
@@ -8,10 +9,9 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
-public class SpecialityDAO extends AbstractDAO<Speciality, Long> {
-    // todo remove exceptions from signature
-    public SpecialityDAO(String connectionString) throws SQLException {
-        super(connectionString);
+public class SpecialityDAO extends AbstractDAO<Speciality, Integer> {
+    public SpecialityDAO(ConnectionPool connectionPool) throws SQLException {
+        super(connectionPool);
     }
 
     @Override
@@ -38,12 +38,12 @@ public class SpecialityDAO extends AbstractDAO<Speciality, Long> {
     }
 
     @Override
-    public Speciality getEntityById(Long id) throws SQLException {
+    public Speciality getEntityById(Integer id) throws SQLException {
         Speciality speciality = null;
         PreparedStatement statement = null;
         try {
             statement = getPrepareStatement("select * from Speciality where idSpeciality = ?");
-            statement.setLong(1, id);
+            statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
                 speciality = new Speciality();
@@ -67,7 +67,7 @@ public class SpecialityDAO extends AbstractDAO<Speciality, Long> {
             statement = getPrepareStatement("update Speciality set name = ?, description = ? where id = ?");
             statement.setString(1, entity.getName());
             statement.setString(2, entity.getDescription());
-            statement.setLong(3, entity.getId());
+            statement.setInt(3, entity.getId());
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -77,11 +77,11 @@ public class SpecialityDAO extends AbstractDAO<Speciality, Long> {
     }
 
     @Override
-    public boolean delete(Long id) throws SQLException {
+    public boolean delete(Integer id) throws SQLException {
         PreparedStatement statement = null;
         try {
             statement = getPrepareStatement("delete from Speciality where idSpeciality = ?");
-            statement.setLong(1, id);
+            statement.setInt(1, id);
             return statement.execute();
         } catch (SQLException exception) {
             exception.printStackTrace();
@@ -98,12 +98,14 @@ public class SpecialityDAO extends AbstractDAO<Speciality, Long> {
             statement = getPrepareStatement("insert into Speciality(name, description) values(?, ?)");
             statement.setString(1, entity.getName());
             statement.setString(2, entity.getDescription());
+
+            return statement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             closePrepareStatement(statement);
         }
-        return statement.execute();
+        return false;
     }
 
 

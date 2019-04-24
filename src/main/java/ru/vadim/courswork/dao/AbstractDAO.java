@@ -2,9 +2,9 @@ package ru.vadim.courswork.dao;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import ru.vadim.courswork.connection.ConnectionPool;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
@@ -13,14 +13,11 @@ import java.util.List;
 public abstract class AbstractDAO<E, K> {
     static final Logger LOGGER = LogManager.getLogger(AbstractDAO.class.getName());
     private Connection connection;
+    private ConnectionPool connectionPool;
 
-    public AbstractDAO(String connectionString) throws SQLException {
-        try {
-            connection = DriverManager.getConnection(connectionString);
-        } catch (SQLException exception) {
-            LOGGER.error(exception.getMessage());
-            throw exception;
-        }
+    AbstractDAO(ConnectionPool connectionPool) throws SQLException {
+        this.connectionPool = connectionPool;
+        connection = connectionPool.getConnection();
     }
 
     PreparedStatement getPrepareStatement(String sql) throws SQLException {
@@ -36,7 +33,6 @@ public abstract class AbstractDAO<E, K> {
     }
 
     void closePrepareStatement(PreparedStatement ps) throws SQLException {
-        System.out.println(1111);
         if (ps != null) {
             try {
                 ps.close();
@@ -47,12 +43,8 @@ public abstract class AbstractDAO<E, K> {
         }
     }
 
-    public void closeConnection() {
-        try {
-            connection.close();
-        } catch (SQLException exception) {
-            LOGGER.error(exception);
-        }
+    public void releaseConnection() {
+        connectionPool.releaseConnection(connection);
     }
 
     public abstract List<E> getAll() throws SQLException;

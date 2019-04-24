@@ -1,13 +1,14 @@
 package ru.vadim.courswork.dao;
 
+import ru.vadim.courswork.connection.ConnectionPool;
 import ru.vadim.courswork.entities.Student;
 
 import java.sql.SQLException;
 import java.util.List;
 
 public class StudentDAO extends AbstractDAO<Student, Integer> {
-    public StudentDAO(String connectionString) throws SQLException {
-        super(connectionString);
+    public StudentDAO(ConnectionPool connectionPool) throws SQLException {
+        super(connectionPool);
     }
 
     @Override
