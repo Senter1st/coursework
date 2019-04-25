@@ -2,7 +2,7 @@ package ru.vadim.courswork.dao;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ru.vadim.courswork.connection.ConnectionPool;
+import ru.vadim.courswork.connection.DBConnectionSingleton;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,11 +13,9 @@ import java.util.List;
 public abstract class AbstractDAO<E, K> {
     static final Logger LOGGER = LogManager.getLogger(AbstractDAO.class.getName());
     private Connection connection;
-    private ConnectionPool connectionPool;
 
-    AbstractDAO(ConnectionPool connectionPool) throws SQLException {
-        this.connectionPool = connectionPool;
-        connection = connectionPool.getConnection();
+    AbstractDAO() {
+        connection = DBConnectionSingleton.getInstance().getConnection();
     }
 
     PreparedStatement getPrepareStatement(String sql) throws SQLException {
@@ -41,10 +39,6 @@ public abstract class AbstractDAO<E, K> {
                 throw exception;
             }
         }
-    }
-
-    public void releaseConnection() {
-        connectionPool.releaseConnection(connection);
     }
 
     public abstract List<E> getAll() throws SQLException;

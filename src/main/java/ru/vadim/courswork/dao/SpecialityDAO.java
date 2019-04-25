@@ -1,6 +1,5 @@
 package ru.vadim.courswork.dao;
 
-import ru.vadim.courswork.connection.ConnectionPool;
 import ru.vadim.courswork.entities.Speciality;
 
 import java.sql.PreparedStatement;
@@ -10,9 +9,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class SpecialityDAO extends AbstractDAO<Speciality, Integer> {
-    public SpecialityDAO(ConnectionPool connectionPool) throws SQLException {
-        super(connectionPool);
-    }
 
     @Override
     public List<Speciality> getAll() throws SQLException {
