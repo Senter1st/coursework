@@ -1,5 +1,7 @@
 package ru.vadim.courswork.dao;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ru.vadim.courswork.entities.Speciality;
 import ru.vadim.courswork.entities.Student;
 
@@ -10,6 +12,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class StudentDAO extends AbstractDAO<Student, Integer> {
+    private static final Logger LOG = LogManager.getLogger(StudentDAO.class);
+
     @Override
     public List<Student> getAll() throws SQLException {
         List<Student> lst = new LinkedList<>();
@@ -21,7 +25,7 @@ public class StudentDAO extends AbstractDAO<Student, Integer> {
                 lst.add(createStudent(rs));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error(e);
         } finally {
             closePrepareStatement(statement);
         }
@@ -42,7 +46,7 @@ public class StudentDAO extends AbstractDAO<Student, Integer> {
                 student = createStudent(rs);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error(e);
         } finally {
             closePrepareStatement(statement);
         }
@@ -61,7 +65,7 @@ public class StudentDAO extends AbstractDAO<Student, Integer> {
             statement.setInt(3, entity.getId());
             statement.execute();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error(e);
         } finally {
             closePrepareStatement(statement);
         }
@@ -94,7 +98,7 @@ public class StudentDAO extends AbstractDAO<Student, Integer> {
 
             return statement.execute();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error(e);
         } finally {
             closePrepareStatement(statement);
         }
@@ -126,7 +130,7 @@ public class StudentDAO extends AbstractDAO<Student, Integer> {
                 student = createStudent(rs);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error(e);
         } finally {
             closePrepareStatement(statement);
         }
@@ -144,7 +148,7 @@ public class StudentDAO extends AbstractDAO<Student, Integer> {
                 students.add(createStudent(rs));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error(e);
         } finally {
             closePrepareStatement(statement);
         }
@@ -161,7 +165,7 @@ public class StudentDAO extends AbstractDAO<Student, Integer> {
             rs.next();
             return rs.getFloat(1);
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error(e);
         } finally {
             closePrepareStatement(statement);
         }

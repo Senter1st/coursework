@@ -1,5 +1,7 @@
 package ru.vadim.courswork.dao;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ru.vadim.courswork.entities.Speciality;
 
 import java.sql.PreparedStatement;
@@ -9,6 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class SpecialityDAO extends AbstractDAO<Speciality, Integer> {
+    private static final Logger LOG = LogManager.getLogger(SpecialityDAO.class);
 
     @Override
     public List<Speciality> getAll() throws SQLException {
@@ -25,7 +28,7 @@ public class SpecialityDAO extends AbstractDAO<Speciality, Integer> {
                 lst.add(speciality);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error(e);
         } finally {
             closePrepareStatement(statement);
         }
@@ -48,7 +51,7 @@ public class SpecialityDAO extends AbstractDAO<Speciality, Integer> {
                 speciality.setDescription(rs.getString(3));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error(e);
         } finally {
             closePrepareStatement(statement);
         }
@@ -66,7 +69,7 @@ public class SpecialityDAO extends AbstractDAO<Speciality, Integer> {
             statement.setInt(3, entity.getId());
             statement.execute();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error(e);
         } finally {
             closePrepareStatement(statement);
         }
@@ -98,7 +101,7 @@ public class SpecialityDAO extends AbstractDAO<Speciality, Integer> {
 
             return statement.execute();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error(e);
         } finally {
             closePrepareStatement(statement);
         }
@@ -120,7 +123,7 @@ public class SpecialityDAO extends AbstractDAO<Speciality, Integer> {
                 speciality.setDescription(rs.getString(3));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error(e);
         } finally {
             closePrepareStatement(statement);
         }

@@ -24,7 +24,6 @@ public class DBConnectionSingleton {
             connection = DriverManager.getConnection(prop.getProperty("connection.url"));
         } catch (IOException ex) {
             LOG.error(ex);
-            ex.printStackTrace();
         }
     }
 
@@ -33,7 +32,7 @@ public class DBConnectionSingleton {
             try {
                 instance = new DBConnectionSingleton();
             } catch (SQLException | ClassNotFoundException e) {
-                e.printStackTrace();
+                LOG.error(e);
             }
         }
         return instance;
@@ -44,7 +43,7 @@ public class DBConnectionSingleton {
             try {
                 instance.connection.close();
             } catch (SQLException e) {
-                e.printStackTrace();
+                LOG.error(e);
             }
         }
     }

@@ -1,5 +1,7 @@
 package ru.vadim.courswork.service;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ru.vadim.courswork.dao.SpecialityDAO;
 import ru.vadim.courswork.dao.StudentDAO;
 import ru.vadim.courswork.entities.Speciality;
@@ -9,6 +11,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class StudentService {
+    private static final Logger LOG = LogManager.getLogger(StudentService.class);
     StudentDAO studentDAO;
     SpecialityDAO specialityDAO;
 
@@ -23,7 +26,7 @@ public class StudentService {
             students = studentDAO.getAll();
             return students;
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error(e);
         }
         return null;
     }
@@ -32,7 +35,7 @@ public class StudentService {
         try {
             return studentDAO.create(student);
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error(e);
         }
 
         return false;
@@ -44,7 +47,7 @@ public class StudentService {
             return studentDAO.getBySpec(speciality.getId());
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error(e);
         }
         return null;
     }
@@ -55,7 +58,7 @@ public class StudentService {
             return studentDAO.getAvgScore(speciality.getId());
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error(e);
         }
         return -1;
     }
