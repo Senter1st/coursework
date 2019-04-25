@@ -18,8 +18,8 @@ import java.util.stream.IntStream;
 
 public class StudentService {
     private static final Logger LOG = LogManager.getLogger(StudentService.class);
-    StudentDAO studentDAO;
-    SpecialityDAO specialityDAO;
+    private StudentDAO studentDAO;
+    private SpecialityDAO specialityDAO;
 
     public StudentService() {
         studentDAO = new StudentDAO();

@@ -5,10 +5,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "student")
 public class Student {
-    int id;
-    String name;
-    Speciality speciality;
-    float score;
+    private int id;
+    private String name;
+    private Speciality speciality;
+    private float score;
 
     public int getId() {
         return id;

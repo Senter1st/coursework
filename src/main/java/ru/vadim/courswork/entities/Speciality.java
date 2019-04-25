@@ -1,9 +1,9 @@
 package ru.vadim.courswork.entities;
 
 public class Speciality {
-    int id;
-    String name;
-    String description;
+    private int id;
+    private String name;
+    private String description;
 
     public int getId() {
         return id;

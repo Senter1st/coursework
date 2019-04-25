@@ -36,7 +36,6 @@ public class StudentDAO extends AbstractDAO<Student, Integer> {
     @Override
     public Student getEntityById(Integer id) throws SQLException {
         Student student = null;
-        Speciality speciality = new Speciality();
         PreparedStatement statement = null;
         try {
             statement = getPrepareStatement("select s.idStudent, s.name, s.score, s.idSpeciality from Student where idStudent = ?");
@@ -139,7 +138,6 @@ public class StudentDAO extends AbstractDAO<Student, Integer> {
     @Override
     public Student getEntityByName(String name) throws SQLException {
         Student student = null;
-        Speciality speciality = new Speciality();
         PreparedStatement statement = null;
         try {
             statement = getPrepareStatement("select s.idStudent, s.name, s.score, s.idSpeciality from Student s where name = ?");

@@ -11,7 +11,7 @@ import java.util.List;
 
 
 public abstract class AbstractDAO<E, K> {
-    static final Logger LOGGER = LogManager.getLogger(AbstractDAO.class.getName());
+    private static final Logger LOGGER = LogManager.getLogger(AbstractDAO.class.getName());
     private Connection connection;
 
     AbstractDAO() {
@@ -19,7 +19,7 @@ public abstract class AbstractDAO<E, K> {
     }
 
     PreparedStatement getPrepareStatement(String sql) throws SQLException {
-        PreparedStatement statement = null;
+        PreparedStatement statement;
         try {
             statement = connection.prepareStatement(sql);
         } catch (SQLException exception) {

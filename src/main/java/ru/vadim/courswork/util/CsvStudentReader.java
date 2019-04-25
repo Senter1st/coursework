@@ -36,19 +36,13 @@ public class CsvStudentReader {
     private static Student createStudent(String[] values) throws NumberFormatException {
         Student student = new Student();
         Speciality speciality = new Speciality();
-        try {
-            for (int i = 0; i < values.length; i++) {
-                student.setId(Integer.valueOf(values[0]));
-                student.setName(values[1]);
-                student.setScore(Float.valueOf(values[2]));
-                speciality.setId(Integer.valueOf(values[3]));
-                student.setSpeciality(speciality);
-            }
-        } catch (NumberFormatException e) {
-            throw e;
+        for (int i = 0; i < values.length; i++) {
+            student.setId(Integer.valueOf(values[0]));
+            student.setName(values[1]);
+            student.setScore(Float.valueOf(values[2]));
+            speciality.setId(Integer.valueOf(values[3]));
+            student.setSpeciality(speciality);
         }
-
-
         return student;
     }
 }
