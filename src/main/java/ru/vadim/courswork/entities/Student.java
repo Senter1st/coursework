@@ -48,11 +48,6 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", speciality=" + speciality +
-                ", score=" + score +
-                '}';
+        return String.format("%d\t%s\t%s\t%d", id, name, score, speciality.getId());
     }
 }

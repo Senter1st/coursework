@@ -105,6 +105,25 @@ public class StudentDAO extends AbstractDAO<Student, Integer> {
         return false;
     }
 
+    public int[] createAll(List<Student> students) throws SQLException {
+        PreparedStatement statement = null;
+        try {
+            statement = getPrepareStatement("insert into Student(name, score, idSpeciality) values(?, ?, ?)");
+            for (Student student : students) {
+                statement.setString(1, student.getName());
+                statement.setFloat(2, student.getScore());
+                statement.setInt(3, student.getSpeciality().getId());
+                statement.addBatch();
+            }
+            return statement.executeBatch();
+        } catch (SQLException e) {
+            LOG.error(e);
+        } finally {
+            closePrepareStatement(statement);
+        }
+        return null;
+    }
+
     private Student createStudent(ResultSet resultSet) throws SQLException {
         Student student = new Student();
         Speciality speciality = new Speciality();
@@ -141,7 +160,7 @@ public class StudentDAO extends AbstractDAO<Student, Integer> {
         List<Student> students = new LinkedList<>();
         PreparedStatement statement = null;
         try {
-            statement = getPrepareStatement("select s.idStudent, s.name, s.score, s.idSpeciality from Student s where sp.idSpeciality = ?");
+            statement = getPrepareStatement("select s.idStudent, s.name, s.score, s.idSpeciality from Student s where s.idSpeciality = ?");
             statement.setInt(1, idSpeciality);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {

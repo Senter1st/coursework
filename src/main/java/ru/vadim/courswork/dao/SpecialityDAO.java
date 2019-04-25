@@ -113,7 +113,7 @@ public class SpecialityDAO extends AbstractDAO<Speciality, Integer> {
         Speciality speciality = null;
         PreparedStatement statement = null;
         try {
-            statement = getPrepareStatement("select * from Speciality where name = ?");
+            statement = getPrepareStatement("select * from Speciality where name like ?");
             statement.setString(1, name);
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {

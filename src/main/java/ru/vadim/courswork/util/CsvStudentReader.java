@@ -15,7 +15,7 @@ public class CsvStudentReader {
     private static final String DELIMITER = ";";
     private static final Logger LOG = LogManager.getLogger(CsvStudentReader.class);
 
-    public static List<Student> read(String filepath) throws IOException {
+    public static List<Student> read(String filepath) {
         List<Student> students = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
             String line;
@@ -27,6 +27,8 @@ public class CsvStudentReader {
                     LOG.error(e);
                 }
             }
+        } catch (IOException e) {
+            LOG.error(e);
         }
         return students;
     }

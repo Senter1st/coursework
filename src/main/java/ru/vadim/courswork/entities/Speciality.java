@@ -31,6 +31,6 @@ public class Speciality {
 
     @Override
     public String toString() {
-        return String.format("Speciality{id=%d, name='%s', description='%s'}", id, name, description);
+        return String.format("%d\t%s\t%s", id, name, description);
     }
 }
