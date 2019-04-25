@@ -10,6 +10,6 @@ create table Student
     idStudent   integer,
     name        varchar,
     score       float,
-    idSpecialty integer,
+    speciality integer,
     foreign key (idSpeciality) references Speciality (idSpeciality)
 );

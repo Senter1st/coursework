@@ -39,6 +39,16 @@ public class DBConnectionSingleton {
         return instance;
     }
 
+    public static void close(){
+        if (instance != null) {
+            try {
+                instance.connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     public synchronized Connection getConnection() {
         return connection;
     }

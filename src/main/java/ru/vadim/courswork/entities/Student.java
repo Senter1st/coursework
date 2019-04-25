@@ -3,7 +3,7 @@ package ru.vadim.courswork.entities;
 public class Student {
     int id;
     String name;
-    int idSpecialty;
+    Speciality speciality;
     float score;
 
     public int getId() {
@@ -22,12 +22,12 @@ public class Student {
         this.name = name;
     }
 
-    public int getIdSpecialty() {
-        return idSpecialty;
+    public Speciality getSpeciality() {
+        return speciality;
     }
 
-    public void setIdSpecialty(int idSpecialty) {
-        this.idSpecialty = idSpecialty;
+    public void setSpeciality(Speciality speciality) {
+        this.speciality = speciality;
     }
 
     public float getScore() {
@@ -40,6 +40,11 @@ public class Student {
 
     @Override
     public String toString() {
-        return String.format("Student{id=%d, name='%s', idSpecialty=%d, score=%s}", id, name, idSpecialty, score);
+        return "Student{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", speciality=" + speciality +
+                ", score=" + score +
+                '}';
     }
 }

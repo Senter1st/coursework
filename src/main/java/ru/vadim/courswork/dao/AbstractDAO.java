@@ -45,6 +45,8 @@ public abstract class AbstractDAO<E, K> {
 
     public abstract E getEntityById(K id) throws SQLException;
 
+    public abstract E getEntityByName(String name) throws SQLException;
+
     public abstract E update(E entity) throws SQLException;
 
     public abstract boolean delete(K id) throws SQLException;

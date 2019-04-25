@@ -64,6 +64,7 @@ public class SpecialityDAO extends AbstractDAO<Speciality, Integer> {
             statement.setString(1, entity.getName());
             statement.setString(2, entity.getDescription());
             statement.setInt(3, entity.getId());
+            statement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -104,5 +105,25 @@ public class SpecialityDAO extends AbstractDAO<Speciality, Integer> {
         return false;
     }
 
-
+    @Override
+    public Speciality getEntityByName(String name) throws SQLException {
+        Speciality speciality = null;
+        PreparedStatement statement = null;
+        try {
+            statement = getPrepareStatement("select * from Speciality where name = ?");
+            statement.setString(1, name);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                speciality = new Speciality();
+                speciality.setId(rs.getInt(1));
+                speciality.setName(rs.getString(2));
+                speciality.setDescription(rs.getString(3));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closePrepareStatement(statement);
+        }
+        return speciality;
+    }
 }
