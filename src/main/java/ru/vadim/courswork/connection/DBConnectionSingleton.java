@@ -3,23 +3,28 @@ package ru.vadim.courswork.connection;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 public class DBConnectionSingleton {
     private static final Logger LOG = LogManager.getLogger(DBConnectionSingleton.class);
     private static DBConnectionSingleton instance;
-    private final String CONNECTION_STRING = "jdbc:sqlite:students.db";
     private Connection connection;
 
     private DBConnectionSingleton() throws SQLException, ClassNotFoundException {
-        try {
-            Class.forName("org.sqlite.JDBC");
-            connection = DriverManager.getConnection(CONNECTION_STRING);
-        } catch (ClassNotFoundException | SQLException e) {
-            LOG.error(e);
-            throw e;
+        Class.forName("org.sqlite.JDBC");
+        try (InputStream input = new FileInputStream("./src/main/resources/config.properties")) {
+            Properties prop = new Properties();
+            prop.load(input);
+            connection = DriverManager.getConnection(prop.getProperty("connection.url"));
+        } catch (IOException ex) {
+            LOG.error(ex);
+            ex.printStackTrace();
         }
     }
 
