@@ -153,10 +153,9 @@ public class StudentDAO extends AbstractDAO<Student, Integer> {
     }
 
     public float getAvgScore(int idSpeciality) throws SQLException {
-        List<Student> students = new LinkedList<>();
         PreparedStatement statement = null;
         try {
-            statement = getPrepareStatement("select avg(s.score) from Student s where sp.idSpeciality = ?");
+            statement = getPrepareStatement("select avg(s.score) from Student s where s.idSpeciality = ?");
             statement.setInt(1, idSpeciality);
             ResultSet rs = statement.executeQuery();
             rs.next();
