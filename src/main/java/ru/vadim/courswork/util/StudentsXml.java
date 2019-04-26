@@ -1,10 +1,9 @@
-package ru.vadim.courswork;
+package ru.vadim.courswork.util;
 
 import ru.vadim.courswork.entities.Student;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSeeAlso;
 import java.util.ArrayList;
 import java.util.List;
 

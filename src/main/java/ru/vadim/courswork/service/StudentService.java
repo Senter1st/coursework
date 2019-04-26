@@ -2,7 +2,7 @@ package ru.vadim.courswork.service;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ru.vadim.courswork.StudentsXml;
+import ru.vadim.courswork.util.StudentsXml;
 import ru.vadim.courswork.dao.SpecialityDAO;
 import ru.vadim.courswork.dao.StudentDAO;
 import ru.vadim.courswork.entities.Speciality;
@@ -89,7 +89,7 @@ public class StudentService {
         return null;
     }
 
-    public boolean addSpecialities(Speciality speciality) {
+    public boolean addSpeciality(Speciality speciality) {
         try {
             return specialityDAO.create(speciality);
         } catch (SQLException e) {

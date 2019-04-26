@@ -84,7 +84,7 @@ public class SpecialityDAO extends AbstractDAO<Speciality, Integer> {
             statement.setInt(1, id);
             return statement.execute();
         } catch (SQLException exception) {
-            exception.printStackTrace();
+            LOG.error(exception);
         } finally {
             closePrepareStatement(statement);
         }
